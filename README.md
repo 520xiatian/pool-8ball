@@ -1,6 +1,6 @@
 # 中式八球
 
-**打开网页就能玩：** https://pool-8ball.linyuanyuan365.workers.dev
+**打开网页就能玩：** https:/tq.520xiatian.eu.org
 
 单机对战人机 + 两人联机。物理、规则、AI 全部自己实现，无第三方引擎依赖。
 同一份逻辑代码同时跑在网页、微信小程序和三种后端上。
@@ -54,21 +54,11 @@ Worker 请求额度；只有 `/api` 和 `/ws` 会进 Worker 逻辑。
 
 ### 免费额度
 
-截至 2026 年 8 月（[官方定价页](https://developers.cloudflare.com/durable-objects/platform/pricing/)）：
 Durable Objects 在 Workers Free 可用，但**只能用 SQLite 存储后端**（本项目正是这么配的），
 每天 10 万次请求、13,000 GB-s 计算时长 [cite:f044b39c-1]。
 台球是回合制，一局几十次请求，够几百人同时玩。
 
 用了 WebSocket Hibernation API，玩家思考的那 30 秒里 DO 会休眠，不计费 [cite:f044b39c-1]。
-
-### 绑定自己的域名（国内直连）
-
-Cloudflare 控制台 → Workers & Pages → 你的 Worker → Settings → Domains & Routes
-→ Add custom domain。域名需要先托管在 Cloudflare（改 NS）。
-
-绑了自有域名就不受 `workers.dev` 的 DNS 干扰影响了。
-
----
 
 ## 微信小程序版
 
@@ -83,21 +73,6 @@ BACKEND: 'ws',   // 'none' 纯单机 | 'cloud' 微信云开发 | 'ws' 自建服�
 
 当前已配置为 `ws` + 上面的 Cloudflare 地址，开发者工具里勾选
 **详情 → 本地设置 → 不校验合法域名**就能联机调试。
-
-### 三种后端怎么选
-
-| 后端 | 开发调试 | 朋友真机玩 | 要备案域名吗 |
-|---|---|---|---|
-| Cloudflare（`ws`） | ✅ | ⚠️ 需备案域名 | 要 |
-| 本地 Node（`ws`） | ✅ 最方便 | ❌ | 不用 |
-| 微信云开发（`cloud`） | ✅ | ✅ | **不用** |
-
-关键限制：**微信真机要求 request/socket 的域名在小程序后台配置为合法域名，
-而这要求域名有 ICP 备案。** `workers.dev` 和未备案的自有域名都过不了。
-开发者工具勾「不校验合法域名」可以绕过，但只对模拟器和真机调试有效。
-
-所以想让朋友用微信扫码就玩，要么绑备案域名，要么用微信云开发。
-**网页版不受这个限制** —— 这也是为什么推荐直接玩网页版。
 
 ### 本地服务器（小程序开发最快）
 
