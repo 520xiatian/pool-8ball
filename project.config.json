@@ -1,0 +1,24 @@
+{
+  "miniprogramRoot": "miniprogram/",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "compileType": "miniprogram",
+  "libVersion": "3.5.6",
+  "appid": "touristappid",
+  "projectname": "pool-8ball",
+  "description": "微信小程序中式八球 · 云开发联机",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "nodeModules": false,
+    "coverView": true,
+    "packNpmManually": false,
+    "ignoreDevUnusedFiles": false,
+    "checkInvalidKey": true,
+    "showShadowRootInWxmlPanel": true
+  },
+  "condition": {}
+}

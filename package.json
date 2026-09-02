@@ -1,0 +1,22 @@
+{
+  "name": "pool-8ball-miniprogram",
+  "version": "1.0.0",
+  "description": "中式八球：网页版（Cloudflare）+ 微信小程序，三种可切换联机后端",
+  "private": true,
+  "scripts": {
+    "test": "node scripts/test-logic.js && node scripts/test-render.js && node scripts/test-cloud.js && node scripts/test-server.js",
+    "test:logic": "node scripts/test-logic.js",
+    "test:render": "node scripts/test-render.js",
+    "test:cloud": "node scripts/test-cloud.js",
+    "test:server": "node scripts/test-server.js",
+    "test:cf": "node scripts/test-cloudflare.js",
+    "test:web": "node scripts/test-web.js",
+    "calibrate": "node scripts/calibrate.js",
+    "gen:sfx": "node scripts/gen-sfx.js",
+    "shot": "node scripts/shot.js",
+    "sync": "node scripts/sync-logic.js",
+    "serve": "node server/index.js",
+    "cf:dev": "npm --prefix cloudflare run dev",
+    "cf:deploy": "npm --prefix cloudflare run deploy"
+  }
+}

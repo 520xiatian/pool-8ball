@@ -1,0 +1,16 @@
+{
+  "pages": [
+    "pages/lobby/lobby",
+    "pages/game/game"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#0d2b1d",
+    "navigationBarTitleText": "台球对战",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0d2b1d"
+  },
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents",
+  "sitemapLocation": "sitemap.json"
+}

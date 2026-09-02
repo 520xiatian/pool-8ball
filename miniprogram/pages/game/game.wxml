@@ -1,0 +1,73 @@
+<view class="game">
+
+  <!-- 顶部：双方信息与回合 -->
+  <view class="hud">
+    <view class="hud__side {{turn === 0 ? 'hud__side--on' : ''}}">
+      <view class="hud__name">{{p0Name}}</view>
+      <view class="hud__grp">{{p0Group}}</view>
+    </view>
+    <view class="hud__mid">
+      <view wx:if="{{countdown > 0}}" class="hud__timer">{{countdown}}s</view>
+      <view wx:else class="hud__vs">VS</view>
+    </view>
+    <view class="hud__side hud__side--right {{turn === 1 ? 'hud__side--on' : ''}}">
+      <view class="hud__name">{{p1Name}}</view>
+      <view class="hud__grp">{{p1Group}}</view>
+    </view>
+  </view>
+
+  <!-- 台面 -->
+  <view class="stage">
+    <canvas type="2d" id="table" class="canvas"
+            bindtouchstart="onTouchStart"
+            bindtouchmove="onTouchMove"
+            bindtouchend="onTouchEnd"
+            bindtouchcancel="onTouchEnd"></canvas>
+
+    <view class="tools">
+      <view class="tool {{is3D ? 'tool--on' : ''}}" bindtap="onToggleView">{{is3D ? '3D' : '2D'}}</view>
+      <view class="tool {{soundOn ? 'tool--on' : ''}}" bindtap="onToggleSound">{{soundOn ? '🔊' : '🔇'}}</view>
+    </view>
+
+    <view wx:if="{{waiting}}" class="overlay">
+      <view class="overlay__box">
+        <view class="overlay__t">等待对手加入</view>
+        <view class="overlay__code">{{roomCode}}</view>
+        <view class="overlay__d">把房间号发给朋友，或让他用「快速匹配」</view>
+        <view class="btn btn--ghost overlay__btn" bindtap="onCopyCode">复制房间号</view>
+      </view>
+    </view>
+
+    <view wx:if="{{gameOver}}" class="overlay">
+      <view class="overlay__box">
+        <view class="overlay__t">{{overText}}</view>
+        <view class="overlay__d">{{message}}</view>
+        <view class="overlay__row">
+          <view class="btn btn--primary overlay__btn {{rematchWaiting ? 'btn--disabled' : ''}}" bindtap="onRematch">{{rematchWaiting ? '等待对手…' : '再来一局'}}</view>
+          <view class="btn btn--ghost overlay__btn" bindtap="onBack">返回大厅</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 底部：状态与力度 -->
+  <view class="bottom">
+    <view class="msg">{{message}}</view>
+
+    <view class="power">
+      <view class="power__label">力度</view>
+      <view class="power__bar">
+        <view class="power__fill" style="width: {{powerPct}}%"></view>
+      </view>
+      <view class="power__num">{{powerPct}}%</view>
+    </view>
+
+    <view class="actions">
+      <view wx:if="{{ballInHand && myTurn}}" class="hint hint--warn">自由球：先拖动白球摆位，再瞄准</view>
+      <view wx:elif="{{myTurn && !busy}}" class="hint">按住台面拖动瞄准，松手出杆</view>
+      <view wx:elif="{{busy}}" class="hint">走球中…</view>
+      <view wx:else class="hint">等待对手出杆…</view>
+      <view class="btn btn--ghost actions__quit" bindtap="onBack">退出</view>
+    </view>
+  </view>
+</view>

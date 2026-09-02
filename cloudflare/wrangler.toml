@@ -1,0 +1,28 @@
+name = "pool-8ball"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# 静态网页：public/ 下的文件直接由 Cloudflare 边缘节点返回，不走 Worker。
+# 匹配不到静态文件的请求（/api、/ws）才会进 Worker 逻辑。
+#
+# 刻意不设 not_found_handling = "single-page-application"：那会把所有
+# 未匹配路径都返回 index.html，连 /api 都吃掉，Worker 永远收不到请求。
+[assets]
+directory = "./public"
+
+# Durable Objects：一个房间一个实例，同实例请求串行执行
+[[durable_objects.bindings]]
+name = "ROOM"
+class_name = "Room"
+
+[[durable_objects.bindings]]
+name = "LOBBY"
+class_name = "Lobby"
+
+# SQLite 存储后端 —— Workers 免费版只能用这一种（KV 后端需付费计划）
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Room", "Lobby"]
+
+[observability]
+enabled = true

@@ -1,0 +1,44 @@
+<view class="lobby">
+  <view class="hero">
+    <view class="hero__title">中式八球</view>
+    <view class="hero__sub">微信小程序 · 云端联机对战</view>
+    <view class="table-mini">
+      <view class="ball ball--y">1</view>
+      <view class="ball ball--k">8</view>
+      <view class="ball ball--r">3</view>
+    </view>
+  </view>
+
+  <view class="panel">
+    <view class="btn btn--primary panel__main" bindtap="onSolo">单机练习（对战人机）</view>
+
+    <view class="row">
+      <view class="btn btn--ghost row__item" bindtap="onQuickMatch">快速匹配</view>
+      <view class="btn btn--ghost row__item" bindtap="onCreate">创建房间</view>
+    </view>
+
+    <view class="join">
+      <input class="join__input" type="text" placeholder="输入 6 位房间号" placeholder-class="ph"
+             maxlength="6" value="{{code}}" bindinput="onCodeInput" />
+      <view class="btn btn--ghost join__btn" bindtap="onJoin">加入</view>
+    </view>
+
+    <view class="diff">
+      <text class="diff__label">人机难度</text>
+      <view class="diff__opts">
+        <view class="diff__opt {{difficulty === 0 ? 'diff__opt--on' : ''}}" data-v="0" bindtap="onDiff">新手</view>
+        <view class="diff__opt {{difficulty === 1 ? 'diff__opt--on' : ''}}" data-v="1" bindtap="onDiff">普通</view>
+        <view class="diff__opt {{difficulty === 2 ? 'diff__opt--on' : ''}}" data-v="2" bindtap="onDiff">高手</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{cloudError}}" class="warn">
+    <text class="warn__t">联机不可用</text>
+    <text class="warn__d">{{cloudError}}</text>
+  </view>
+
+  <view class="tips">
+    <text>拖动白球瞄准，滑动距离决定力度，松手出杆。</text>
+  </view>
+</view>

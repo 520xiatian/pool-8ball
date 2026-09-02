@@ -1,0 +1,36 @@
+page {
+  background: #0d2b1d;
+  color: #eaf5ee;
+  font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999rpx;
+  font-size: 32rpx;
+  font-weight: 600;
+  letter-spacing: 2rpx;
+  transition: opacity .15s;
+}
+
+.btn:active {
+  opacity: .72;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #f4c552, #e0952c);
+  color: #2a1b04;
+}
+
+.btn--ghost {
+  background: rgba(255, 255, 255, .1);
+  color: #eaf5ee;
+  border: 1rpx solid rgba(255, 255, 255, .22);
+}
+
+.btn--disabled {
+  opacity: .4;
+}

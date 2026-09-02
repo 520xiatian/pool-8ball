@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0d2b1d">
+<meta name="description" content="中式八球在线对战：单机练习或与朋友联机，开网页即玩，无需安装。">
+<title>中式八球 · 在线对战</title>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- ======== 大厅 ======== -->
+<section id="lobby" class="screen screen--on">
+  <div class="hero">
+    <h1 class="hero__title">中式八球</h1>
+    <p class="hero__sub">开网页即玩 · 单机练习 / 联机对战</p>
+    <div class="table-mini" aria-hidden="true">
+      <span class="ball ball--y">1</span>
+      <span class="ball ball--k">8</span>
+      <span class="ball ball--r">3</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <button class="btn btn--primary btn--big" id="btnSolo">单机练习（对战电脑）</button>
+
+    <div class="diff">
+      <span class="diff__label">电脑难度</span>
+      <div class="diff__opts" role="group" aria-label="电脑难度">
+        <button class="diff__opt" data-diff="0">新手</button>
+        <button class="diff__opt diff__opt--on" data-diff="1">普通</button>
+        <button class="diff__opt" data-diff="2">高手</button>
+      </div>
+    </div>
+
+    <hr class="sep">
+
+    <div class="row">
+      <button class="btn btn--ghost" id="btnQuick">快速匹配</button>
+      <button class="btn btn--ghost" id="btnCreate">创建房间</button>
+    </div>
+
+    <form class="join" id="joinForm" autocomplete="off">
+      <input class="join__input" id="codeInput" type="text" inputmode="latin"
+             placeholder="输入 6 位房间号" maxlength="6" aria-label="房间号">
+      <button class="btn btn--ghost join__btn" type="submit">加入</button>
+    </form>
+
+    <p class="tips">
+      联机时把房间号或链接发给朋友即可。手机和电脑都能玩。
+    </p>
+  </div>
+</section>
+
+<!-- ======== 对局 ======== -->
+<section id="game" class="screen">
+  <div class="hud">
+    <div class="hud__side" id="hud0">
+      <div class="hud__name" id="p0Name">我</div>
+      <div class="hud__grp" id="p0Group">未定</div>
+    </div>
+    <div class="hud__mid">
+      <div class="hud__timer" id="timer"></div>
+    </div>
+    <div class="hud__side hud__side--right" id="hud1">
+      <div class="hud__name" id="p1Name">电脑</div>
+      <div class="hud__grp" id="p1Group">未定</div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <canvas id="table" aria-label="台球桌"></canvas>
+
+    <div class="stage__tools">
+      <button class="tool" id="btnView" aria-pressed="false"
+              title="切换 2D 俯视 / 3D 视角">3D</button>
+      <button class="tool" id="btnSound" aria-pressed="true"
+              title="开关音效">🔊</button>
+    </div>
+
+    <div class="overlay" id="waitOverlay" hidden>
+      <div class="overlay__box">
+        <div class="overlay__t">等待对手加入</div>
+        <div class="overlay__code" id="waitCode">------</div>
+        <p class="overlay__d">把房间号或下面的链接发给朋友</p>
+        <div class="overlay__row">
+          <button class="btn btn--primary" id="btnCopyLink">复制邀请链接</button>
+          <button class="btn btn--ghost" id="btnCancelWait">返回</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="overOverlay" hidden>
+      <div class="overlay__box">
+        <div class="overlay__t" id="overText">对局结束</div>
+        <p class="overlay__d" id="overDesc"></p>
+        <div class="overlay__row">
+          <button class="btn btn--primary" id="btnRematch">再来一局</button>
+          <button class="btn btn--ghost" id="btnBackLobby">返回大厅</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="msg" id="msg">开球</div>
+    <div class="power">
+      <span class="power__label">力度</span>
+      <div class="power__bar"><div class="power__fill" id="powerFill"></div></div>
+      <span class="power__num" id="powerNum">0%</span>
+    </div>
+    <div class="actions">
+      <span class="hint" id="hint">按住台面拖动瞄准，松手出杆</span>
+      <button class="btn btn--ghost btn--sm" id="btnQuit">退出</button>
+    </div>
+  </div>
+</section>
+
+<div class="toast" id="toast" hidden></div>
+
+<!-- CommonJS 垫片必须在 logic 之前 -->
+<script src="/js/module-shim.js"></script>
+<!-- 与小程序、服务端逐字节相同的逻辑代码 -->
+<script src="/logic/physics.js"></script>
+<script src="/logic/rules.js"></script>
+<script src="/logic/bot.js"></script>
+<script src="/logic/renderer.js"></script>
+<!-- Web 版专属：网络层与页面控制 -->
+<script src="/js/net.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

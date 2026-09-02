@@ -1,0 +1,10 @@
+{
+  "name": "poolRoom",
+  "version": "1.0.0",
+  "description": "台球联机房间：建房/加入/出杆校验/心跳",
+  "main": "index.js",
+  "private": true,
+  "dependencies": {
+    "wx-server-sdk": "~2.6.3"
+  }
+}
